@@ -1,11 +1,85 @@
 {% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-    <h1>Welcome to your new Wagtail site!</h1>
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary navbar-transparent">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand">UCK DEV CLUB</a>
+            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle Navigation">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse justify-content-end collapse" id="navigation" data-nav-image="{% static 'img/blurred-image-1.jpg' %}">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="now-ui-icons gestures_tap-01"></i>
+                        <p>Register</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="now-ui-icons users_single-02"></i>
+                        <p>Login</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+    <div class="wrapper">
+    <div class="page-header has-image clear-filter" filter-color="orange">
+    <div id="particles-js" data-parallax="true" style="background-image: url('/static/img/5570.jpg'); background-repeat: no-repeat; background-size: cover; position: relative;">
+        <div class="container" style="position: absolute; right: 0; left: 0">
+            <div class="content-center brand">
+            <img class="n-logo" src="{% static 'img/logo_bear.png' %}" style="padding: 20px; max-width: 200px; height: 200px; /*border-radius: 50%; background-color: white*/">
+                <div>
+                    <h1 id="changing-text" class="h1-seo"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).</p>
+    </div>
+        <div class="main">
+            <div class="section">
+            <div class="container">
+                {{ page.body|richtext }}
+            </div>
+            </div>
+        </div>
+    </div>
 
-    <p>If you haven't already given the documentation a read, head over to <a href="http://docs.wagtail.io/">http://docs.wagtail.io</a> to start building on Wagtail</p>
+
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/particles.js' %}"></script>
+    <script type="text/javascript">
+    var text = ["Hello World", "UCK Developer Student Club"];
+    var counter = 1;
+    var elem = document.getElementById("changing-text");
+    $(elem).text(text[0]);
+    setInterval(change, 4000);
+
+    function change() {
+        $(elem).fadeOut(500, function() {
+        $(elem).text(text[counter++]);
+
+        if (counter >= text.length) {
+            counter = 0;
+        }
+        }).fadeIn(500);
+    }
+    </script>
+    <script>
+    particlesJS.load('particles-js', '/static/js/particlesjs-config.json', function() {
+        console.log('callback - particles.js config loaded');
+    });
+    </script>
 {% endblock %}
